@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id="bt1">Get all the dishes</button>
+  <button id="bt2">Get a dish</button>
+
+  <hr>
+  <input type="text" id="inputDesc">
+  <input type="file" id="inputFile">
+  <button id="bt3" type="button">Asynchronous upload of dishes pictures</button>
+  <hr>
+
+  <button id="bt4">Add dishes</button>
+  <button id="bt5">Delete dishes</button>
+  <button id="bt6">Update dishes</button>
+  <script src="axios.min.js"></script>
+  <script>
+  bt1.onclick = function(){
+    axios.get('http://127.0.0.1:8090/admin/dish').then((res)=>{
+      console.log(res.data);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
+  
+  bt3.onclick = function(){
+    /*异步上传文件*/
+    //手工创建一个multipart/form-data形式的请求主体
+    var data = new FormData();
+    //向请求主体中追加要提交的数据
+    data.append('description', inputDesc.value);
+    //向请求主体中追加用户选中的文件
+    //console.dir(inputFile);
+    data.append('dishImg', inputFile.files[0]);
+    //使用axios将请求主体异步提交给服务器
+    axios.post('http://127.0.0.1:8090/admin/dish/image',data).then((res)=>{
+      alert(  JSON.stringify(res.data)  );
+    }).catch((err)=>{
+      alert(err);
+    })
+  }
+  
+  bt4.onclick = function(){
+    var data = {
+      title: 'Pancake',
+      imgUrl: '1234567.jpg',
+      price: 35,
+      detail: 'Pancake details', 
+      categoryId: 3
+    }
+    axios.post('http://127.0.0.1:8090/admin/dish',data).then((res)=>{
+        console.log(res.data);
+      }).catch((err)=>{
+        console.log(err);
+    })
+  }
+  
+  </script>
+
+
+<hr>
+<button class="btn">0</button>
+<button class="btn">1</button>
+<button class="btn">2</button>
+<script>
+var btnList = document.querySelectorAll('.btn');
+//for(var i=0; i<btnList.length; i++){
+for(let i=0; i<btnList.length; i++){
+  console.log('Create a click listener function...');
+  btnList[i].onclick = function(){
+    console.log(i);
+  }
+}
+
+//console.log('所有代码执行完成，i='+i);
+</script>
+
+<hr>
+<h3>File upload</h3>
+<form action="http://127.0.0.1:8090/admin/dish/image" method="POST" enctype="multipart/form-data">
+  <input type="text" name="description">
+  <input type="file" name="dishImg"><br>
+  <input type="submit">
+</form>
+</body>
+</html>

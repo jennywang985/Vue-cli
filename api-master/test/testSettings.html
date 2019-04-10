@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id='bt1'>Get global settings information</button>
+  <button id='bt2'>Modify global settings information</button>
+  <script src="./axios.min.js"></script>
+  <script>
+    bt1.onclick = function(){
+      axios.get('http://127.0.0.1:8090/admin/settings').then((result)=>{
+        console.log('Get global Setup Success')
+        console.log(result.data);
+      }).catch((err)=>{
+        console.log(err); 
+      })
+    }
+
+    bt2.onclick = function(){
+      var data = {sid:1,appName:'HotPot1',apiUrl:'http://127.0.0.1:8090',adminUrl:'http://127.0.0.1:8091',appUrl:'http://127.0.0.1:8092',icp:'ICP12003709-3',copyright:'londonxxxxxxxxxxx'};
+
+      axios.put('http://127.0.0.1:8090/admin/settings', data).then((result)=>{
+        console.log(result.data);
+      }).catch((err)=>{
+        console.log(err);
+      })
+    }
+
+  </script>
+</body>
+</html>
