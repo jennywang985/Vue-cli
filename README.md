@@ -1,5 +1,5 @@
 # Vue-cli
-Admin Dashboard- scan-QR-code HotPot dishes order system
+Admin Dashboard- scan-QR-code HotPot dishes order system.
 PC side admin dashboard to complete the interaction functions between front-end and back-end.Functions include: login, submission, table management (add/delete table), order management (add/delete dishes), progress management, password update.
 
 # in HotPot-admin (front-end)
