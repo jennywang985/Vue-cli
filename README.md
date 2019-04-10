@@ -42,3 +42,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ```
 node ./index.js
 ```
+
+![image](https://github.com/jennywang985/Vue-cli/blob/master/Rec%200004(3).gif)
